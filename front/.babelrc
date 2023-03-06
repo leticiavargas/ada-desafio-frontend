@@ -1,0 +1,16 @@
+{
+  "plugins": [
+    [
+      "module-resolver", {
+        "root": ["./"],
+        "alias": {
+          "components": "./src/components",
+          "screens": "./src/screens",
+          "hooks": "./src/hooks",
+          "utils": "./src/utils",
+          "locales": "./src/locales",
+        }
+      }
+    ]
+  ]
+}
