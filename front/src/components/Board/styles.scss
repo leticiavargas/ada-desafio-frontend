@@ -9,24 +9,32 @@
 
   .collumn {
     background-color: colors.$lightBlue;
-    width: 280px;
+    min-width: 180px;
+    width: 100%;
     border-radius: 6px;
-    padding: 4px 0;
+    padding: 0 6px 8px;
+    box-sizing: border-box;
 
-    header {
+    >header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       height: 40px;
-      text-align: center;
       font-size: fonts.$medium;
       font-weight: fonts.$bold;
       color: colors.$neutral;
     }
 
-    main {
+    >main {
       padding: 0 4px;
     }
   }
 
   .collumn + .collumn {
-    margin-left: 10px;
+    margin-left: 24px;
+  }
+
+  .card + .card {
+    margin-top: 8px;
   }
 }
