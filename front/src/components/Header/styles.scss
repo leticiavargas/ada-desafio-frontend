@@ -1,0 +1,7 @@
+@use 'src/styles/colors';
+
+.main-header {
+  height: 50px;
+  color: colors.$white;
+  background: linear-gradient(180deg, rgba(5,32,74,1) 0%, rgba(255,255,255,0) 100%);
+}

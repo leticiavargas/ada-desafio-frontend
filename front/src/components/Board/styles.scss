@@ -1,0 +1,32 @@
+@use 'src/styles/colors';
+@use 'src/styles/fonts';
+
+.board {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 40px;
+
+  .collumn {
+    background-color: colors.$lightBlue;
+    width: 280px;
+    border-radius: 6px;
+    padding: 4px 0;
+
+    header {
+      height: 40px;
+      text-align: center;
+      font-size: fonts.$medium;
+      font-weight: fonts.$bold;
+      color: colors.$neutral;
+    }
+
+    main {
+      padding: 0 4px;
+    }
+  }
+
+  .collumn + .collumn {
+    margin-left: 10px;
+  }
+}
