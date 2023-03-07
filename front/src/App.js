@@ -1,10 +1,8 @@
-import './App.scss';
+import Kanban from "screens/kanban";
 
 function App() {
   return (
-    <div>
-     Hello World
-    </div>
+    <Kanban />
   );
 }
 

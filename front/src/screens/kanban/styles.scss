@@ -1,0 +1,6 @@
+@use 'src/styles/colors';
+
+.kanban {
+  background-color: colors.$blue;
+  height: 100%;
+}
