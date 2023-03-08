@@ -1,0 +1,49 @@
+@use 'src/styles/colors';
+@use 'src/styles/fonts';
+
+.modal {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  transition: 180ms ease-in-out;
+  pointer-events: none;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  z-index: 999;
+
+  .contentContainer {
+    background-color: colors.$lightBlue;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    min-width: 50vw;
+
+    >header {
+      display: flex;
+      flex-direction: row;
+
+      >h2 {
+        color: colors.$darkBlue;
+        font-size: fonts.$medium;
+        flex: 1;
+      }
+
+      >.button {
+        background-color: transparent;
+      }
+    }
+
+  }
+}
+
+.modal.visible {
+  opacity: 1;
+  background-color: colors.$transparentNeutral;
+  pointer-events: auto;
+}
