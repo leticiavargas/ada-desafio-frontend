@@ -59,9 +59,21 @@ function Card({data, onEdit, onDelete, onUpdate }) {
         <div dangerouslySetInnerHTML={{__html: renderedHTML}} />
       </main>
       <footer>
-        {lista !== COLLUMNS_NAME[0] && <Button type="button" onClick={() => handleChangeList('left')}> <FaChevronCircleLeft /> </Button>}
+        <Button 
+          type="button" 
+          onClick={() => handleChangeList('left')} 
+          disabled={lista === COLLUMNS_NAME[0]}
+        > 
+          <FaChevronCircleLeft /> 
+        </Button>
         <Button type="button" onClick={handleDelete}> <FaTrash /> </Button>
-        {lista !== COLLUMNS_NAME[2] && <Button type="button" onClick={() => handleChangeList('right')}> <FaChevronCircleRight /> </Button>}
+        <Button 
+          type="button" 
+          onClick={() => handleChangeList('right')}
+          disabled={lista === COLLUMNS_NAME[2]}
+        > 
+          <FaChevronCircleRight /> 
+        </Button>
       </footer>
     </div>
   )
