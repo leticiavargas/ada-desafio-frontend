@@ -1,4 +1,5 @@
 import { Card, Button } from 'components';
+import './styles.scss';
 
 function Collumn({ title, actionButtonTitle, actionButton, onEdit, onDelete, onUpdate, cards }) {  
 

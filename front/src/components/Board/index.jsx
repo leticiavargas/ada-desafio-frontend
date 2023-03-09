@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import api from 'services/api';
-import { CardModal } from 'components';
+import { CardModal, Collumn } from 'components';
 import { groupBy, COLLUMNS_NAME } from 'utils';
 
-import Collumn from "./Collumn";
 import './styles.scss';
 
 function Board() {
