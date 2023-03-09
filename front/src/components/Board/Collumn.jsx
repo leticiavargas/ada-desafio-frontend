@@ -1,20 +1,8 @@
 
 import { Card, Button } from 'components';
-import useCards from 'hooks/useCards';
 
-function Collumn({ title, actionButtonTitle, actionButton, onCardEdit }) {  
-/*  const { getCardList, postCard } = useCards();
+function Collumn({ title, actionButtonTitle, actionButton, onCardEdit, cards }) {  
 
-  const teste = postCard({
-    titulo: "titulo do card",
-    conteudo: "conteudo de um card"
-  })
-
-  console.log('TESTE >>>', teste)
-
-
-  getCardList();
-*/
   return(
     <div className="collumn">
       <header>
@@ -26,14 +14,16 @@ function Collumn({ title, actionButtonTitle, actionButton, onCardEdit }) {
         }
       </header>
       <main>
-        <Card 
-          id={1}
-          title="Titulo cardzito"
-          content="**Conteudo** do cardezito"
-          list="ToDo"
-          onEdit={onCardEdit}
-        />
-        <Card />
+        {cards?.map((card) => (
+          <Card 
+            key={card.id}
+            id={card.id}
+            title={card.titulo}
+            content={card.conteudo}
+            list={card.lista}
+            onEdit={onCardEdit}
+          />
+        ))}
       </main>
     </div>
   )
