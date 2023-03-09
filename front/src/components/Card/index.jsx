@@ -55,9 +55,9 @@ function Card({data, onEdit, onDelete, onUpdate }) {
           <FaEdit />
         </Button>
       </header>
-      <main>
+      <div className="main">
         <div dangerouslySetInnerHTML={{__html: renderedHTML}} />
-      </main>
+      </div>
       <footer>
         <Button 
           type="button" 

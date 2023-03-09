@@ -17,7 +17,7 @@ function Collumn({ title, actionButtonTitle, actionButton, onEdit, onDelete, onU
           </Button>
         }
       </header>
-      <main>
+      <div className='main'>
         {!cards && <div className='empty-state'>Sem cards nesta lista</div>}
 
         {cards?.map((card) => (
@@ -30,7 +30,7 @@ function Collumn({ title, actionButtonTitle, actionButton, onEdit, onDelete, onU
           />
         ))}
 
-      </main>
+      </div>
     </div>
   )
 }
