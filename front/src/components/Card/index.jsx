@@ -1,3 +1,4 @@
+import api from 'services/api';
 import { Button } from 'components';
 import { FaEdit, FaTrash, FaChevronCircleLeft, FaChevronCircleRight } from "react-icons/fa";
 import { marked } from 'marked';
@@ -7,6 +8,17 @@ import './styles.scss';
 function Card({id, title, content='', list, onEdit }) {
 
   const renderedHTML = DOMPurify.sanitize(marked.parse(content));
+
+  const handleDelete = async () => {
+    console.log("deletando ...")
+
+    try {
+      const response = await api.delete('cards/' + id);
+      console.log("deletou?", response);
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return(
     <div className='card'>
@@ -24,7 +36,7 @@ function Card({id, title, content='', list, onEdit }) {
       </main>
       <footer>
         {list !== "ToDo" && <Button type="button"> <FaChevronCircleLeft /> </Button>}
-        <Button type="button"> <FaTrash /> </Button>
+        <Button type="button" onClick={handleDelete}> <FaTrash /> </Button>
         {list !== "Done" && <Button type="button"> <FaChevronCircleRight /> </Button>}
       </footer>
     </div>
