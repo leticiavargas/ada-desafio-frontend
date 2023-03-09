@@ -1,7 +1,6 @@
 @use 'src/styles/colors';
 
 .kanban {
-  background-color: colors.$blue;
   height: 100%;
   display: flex;
   flex-direction: column;

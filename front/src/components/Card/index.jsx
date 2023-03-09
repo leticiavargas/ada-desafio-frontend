@@ -14,6 +14,10 @@ function Card({data, onEdit, onDelete, onUpdate }) {
   const renderedHTML = DOMPurify.sanitize(marked.parse(conteudo));
 
   const handleDelete = async () => {
+    
+    if(window.confirm("Você tem certeza que deseja excluir o card") == false)
+      return;
+
     try {
       const response = await api.delete('cards/' + id);
       if (response.status === 200)
