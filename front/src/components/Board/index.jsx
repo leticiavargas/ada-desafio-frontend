@@ -1,75 +1,82 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import api from 'services/api';
 import { CardModal } from 'components';
-import { groupBy } from 'utils';
+import { groupBy, COLLUMNS_NAME } from 'utils';
 
 import Collumn from "./Collumn";
 import './styles.scss';
-
 
 function Board() {
 
   const[cards, setCards] = useState([]);
   const[showCardModal, setShowCardModal] = useState(undefined);
   
-  useEffect(() => {
-    async function getCards () {
-      try {
-        const response = await api.get('cards');
-        setCards(response.data);
-      } catch (error) {
-        console.error(error)
-      }
+
+  const getCards = useCallback(async () => {
+    try {
+      const response = await api.get('cards');
+      setCards(response.data);
+    } catch (error) {
+      console.error(error)
     }
-    getCards();
   }, []);
 
-  console.log("CARDS LIST >>>", cards);
+  useEffect(() => {
+    getCards();
+  }, [getCards]);
 
   const handleNewCard = () => {
-    console.log("New Card");
     setShowCardModal({});
   }
 
-  const handleCardEdit = (card) => {
-    console.log("EDIÇÃO CARD >>>", card);
-    setShowCardModal({})
+  const handleEdit = (card) => {
+    setShowCardModal(card);
   }
 
   const handleSave = (savedCard) => {
     setCards(prevState => [...prevState, savedCard]);
   }
 
+  const handleDelete = (deletedCardId) => {
+    setCards(prevState => prevState.filter(item => item.id !== deletedCardId))
+  }
+
+  const handleUpdate = () => {
+    getCards();
+  }
+
   const cardsList = useMemo(() => (
     groupBy(cards, 'lista')
   ), [cards]);
 
-  console.log(cardsList);
-
   return(
     <main className="board">
-      <Collumn 
-        title="To Do" 
-        actionButtonTitle={"Novo card"}
-        actionButton={handleNewCard}
-        onCardEdit={handleCardEdit}
-        cards={cardsList?.ToDo}
-      />
-      <Collumn 
-        title="Doing" 
-        onCardEdit={handleCardEdit}
-        cards={cardsList?.Doing}
-      />
-      <Collumn 
-        title="Done" 
-        onCardEdit={handleCardEdit}
-        cards={cardsList?.Done}
-      />
+      {
+        COLLUMNS_NAME.map((collumn, index) => {
+          let actionProps = {};
+          if (index === 0) {
+            actionProps.actionButtonTitle = "Novo card";
+            actionProps.actionButton= handleNewCard
+          }
+          return(
+            <Collumn
+              key={collumn}
+              title={collumn}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+              onUpdate={handleUpdate}
+              cards={cardsList[collumn]}
+              {...actionProps}
+            />
+          )
+        })
+      }
 
       <CardModal 
         cardData={showCardModal}
         onClose={() => setShowCardModal(undefined)} 
         onSave={handleSave}
+        onUpdate={handleUpdate}
       />
     </main>
   )

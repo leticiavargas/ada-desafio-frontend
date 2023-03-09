@@ -1,32 +1,52 @@
 import api from 'services/api';
 import { Button } from 'components';
+import { COLLUMNS_NAME } from 'utils';
 import { FaEdit, FaTrash, FaChevronCircleLeft, FaChevronCircleRight } from "react-icons/fa";
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import './styles.scss';
 
-function Card({id, title, content='', list, onEdit }) {
+function Card({data, onEdit, onDelete, onUpdate }) {
+  
+  if (!data) return;
 
-  const renderedHTML = DOMPurify.sanitize(marked.parse(content));
+  const { id, titulo, conteudo, lista} = data;
+  const renderedHTML = DOMPurify.sanitize(marked.parse(conteudo));
 
   const handleDelete = async () => {
-    console.log("deletando ...")
-
     try {
       const response = await api.delete('cards/' + id);
-      console.log("deletou?", response);
+      if (response.status === 200)
+        onDelete(id);
     } catch (error) {
-      console.error(error)
+      console.error(error);
+    }
+  }
+
+  const handleChangeList = async (direction) => {
+    const listIndex = COLLUMNS_NAME.indexOf(lista);
+
+    const newListIndex = direction === 'left' ? listIndex - 1 : listIndex + 1;
+    const newList = COLLUMNS_NAME[newListIndex];
+    
+    const cardData = {...data, lista: newList};
+
+    try {
+      const response = await api.put('cards/' + cardData.id, cardData);
+      if (response.status === 200)
+        onUpdate();
+    } catch (error) {
+      console.error(error);
     }
   }
 
   return(
     <div className='card'>
       <header>
-        <label>{title}</label>
+        <label>{titulo}</label>
         <Button
           title="Clique aqui para editar o card"
-          onClick={() => onEdit(id)}
+          onClick={() => onEdit(data)}
         >
           <FaEdit />
         </Button>
@@ -35,9 +55,9 @@ function Card({id, title, content='', list, onEdit }) {
         <div dangerouslySetInnerHTML={{__html: renderedHTML}} />
       </main>
       <footer>
-        {list !== "ToDo" && <Button type="button"> <FaChevronCircleLeft /> </Button>}
+        {lista !== COLLUMNS_NAME[0] && <Button type="button" onClick={() => handleChangeList('left')}> <FaChevronCircleLeft /> </Button>}
         <Button type="button" onClick={handleDelete}> <FaTrash /> </Button>
-        {list !== "Done" && <Button type="button"> <FaChevronCircleRight /> </Button>}
+        {lista !== COLLUMNS_NAME[2] && <Button type="button" onClick={() => handleChangeList('right')}> <FaChevronCircleRight /> </Button>}
       </footer>
     </div>
   )

@@ -4,3 +4,5 @@ export const groupBy = (arr, property) => {
     return acc;
   }, {});
 }
+
+export const COLLUMNS_NAME = ['ToDo', 'Doing', 'Done'];

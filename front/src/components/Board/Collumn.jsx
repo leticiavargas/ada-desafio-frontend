@@ -1,7 +1,6 @@
-
 import { Card, Button } from 'components';
 
-function Collumn({ title, actionButtonTitle, actionButton, onCardEdit, cards }) {  
+function Collumn({ title, actionButtonTitle, actionButton, onEdit, onDelete, onUpdate, cards }) {  
 
   return(
     <div className="collumn">
@@ -14,16 +13,18 @@ function Collumn({ title, actionButtonTitle, actionButton, onCardEdit, cards }) 
         }
       </header>
       <main>
+        {!cards && <div className='empty-state'>Sem cards nesta lista</div>}
+
         {cards?.map((card) => (
           <Card 
             key={card.id}
-            id={card.id}
-            title={card.titulo}
-            content={card.conteudo}
-            list={card.lista}
-            onEdit={onCardEdit}
+            data={card}
+            onEdit={onEdit}
+            onDelete={onDelete}
+            onUpdate={onUpdate}
           />
         ))}
+
       </main>
     </div>
   )

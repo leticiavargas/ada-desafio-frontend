@@ -14,14 +14,46 @@
     color: colors.$darkBlue;
     margin-bottom: 4px;
     font-weight: fonts.$bold;
+
+    .required {
+      color: colors.$neutral;
+      font-size: fonts.$small;
+      font-weight: fonts.$semiBold ;
+    }
   }
 
-  >input + label {
-    margin-top: 16px;
+  >label.error {
+    color: colors.$alert;
+  }
+
+  .legend {
+    font-size: fonts.$legend;
+    color: colors.$alert;
+    margin-top: 2px;
+  }
+
+  >input {
+    border: 1px solid colors.$darkBlue;
+  }
+
+  >.error {
+    border-color: colors.$alert;
   }
 
   >textarea {
     height: 40vh;
+    border: 1px solid colors.$darkBlue;
+  }
+
+  >input + label {
+    margin-top: 28px;
+  }
+  >span + label {
+    margin-top: 14px;
+  }
+
+  >span + footer {
+    margin-top: unset;
   }
 
   >footer {
@@ -29,5 +61,6 @@
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+    margin-top: 13px;
   }
 }
