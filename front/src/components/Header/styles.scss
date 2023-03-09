@@ -1,7 +1,13 @@
 @use 'src/styles/colors';
+@use 'src/styles/fonts';
 
 .main-header {
-  height: 50px;
+  height: 72px;
   color: colors.$white;
   background: linear-gradient(180deg, rgba(5,32,74,1) 0%, rgba(255,255,255,0) 100%);
+  font-size: fonts.$medium;
+  font-weight: fonts.$bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

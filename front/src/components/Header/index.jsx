@@ -3,7 +3,7 @@ import './styles.scss';
 function Header() {
   return(
     <header className='main-header'>
-      Header
+      ADA - Kanban by Letícia
     </header>
   )
 }
