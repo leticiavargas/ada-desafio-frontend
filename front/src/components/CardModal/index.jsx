@@ -1,22 +1,46 @@
 import { Modal, Button } from 'components';
+import { useState } from 'react';
 import { FaSave, FaBan } from 'react-icons/fa';
 import './styles.scss';
 
-function CardModal({ ...otherProps }) {
+function CardModal({ cardId, onClose, ...otherProps }) {
+
+  const[title, setTitle] = useState('');
+  const[content, setContent] = useState('');
+
+  const handleClose = () => {
+    setContent('');
+    setTitle('');
+    onClose();
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    const formJson = Object.fromEntries(formData.entries());
+    console.log(formJson);
+  }
+
   return(
-    <Modal {...otherProps}>
-      <div className='card-modal'>
-        
-          <label htmlFor=''>Titulo</label>
-          <input />
-          <label>Descrição</label>
-          <textarea />
+    <Modal onClose={onClose} {...otherProps}>
+      <form className='card-modal' onSubmit={handleSubmit}>
+        <label htmlFor='titulo'>Titulo</label>
+        <input name="titulo" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <label>Descrição</label>
+        <textarea 
+          name='conteudo'
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
        
         <footer>
-          <Button> <FaBan /> </Button>
-          <Button> <FaSave /> </Button>
+          <Button type='button' onClick={handleClose}> <FaBan /> </Button>
+          <Button title='Salvar'> <FaSave /> </Button>
         </footer>
-      </div>
+      </form>
     </Modal>
   )
 }

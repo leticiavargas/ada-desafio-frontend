@@ -1,4 +1,5 @@
 @use 'src/styles/colors';
+@use 'src/styles/fonts';
 
 .card-modal {
   display: flex;
@@ -9,10 +10,24 @@
   padding: 8px;
   background-color: colors.$gray;
 
+  >label {
+    color: colors.$darkBlue;
+    margin-bottom: 4px;
+    font-weight: fonts.$bold;
+  }
+
+  >input + label {
+    margin-top: 16px;
+  }
+
+  >textarea {
+    height: 40vh;
+  }
+
   >footer {
     height: 24px;
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     justify-content: space-between;
   }
 }

@@ -2,7 +2,7 @@
 import { Card, Button } from 'components';
 import useCards from 'hooks/useCards';
 
-function Collumn({ title, actionButtonTitle, actionButton }) {  
+function Collumn({ title, actionButtonTitle, actionButton, onCardEdit }) {  
 /*  const { getCardList, postCard } = useCards();
 
   const teste = postCard({
@@ -26,7 +26,13 @@ function Collumn({ title, actionButtonTitle, actionButton }) {
         }
       </header>
       <main>
-        <Card />
+        <Card 
+          id={1}
+          title="Titulo cardzito"
+          content="**Conteudo** do cardezito"
+          list="ToDo"
+          onEdit={onCardEdit}
+        />
         <Card />
       </main>
     </div>

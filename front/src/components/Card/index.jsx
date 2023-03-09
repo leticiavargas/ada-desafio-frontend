@@ -1,23 +1,31 @@
 import { Button } from 'components';
-import { FaEdit, FaPlusCircle, FaTrash, FaChevronCircleLeft, FaChevronCircleRight, FaSave } from "react-icons/fa";
+import { FaEdit, FaTrash, FaChevronCircleLeft, FaChevronCircleRight } from "react-icons/fa";
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 import './styles.scss';
 
-function Card() {
+function Card({id, title, content='', list, onEdit }) {
+
+  const renderedHTML = DOMPurify.sanitize(marked.parse(content));
+
   return(
     <div className='card'>
       <header>
-        <label>Titulo Card</label>
+        <label>{title}</label>
         <Button
           title="Clique aqui para editar o card"
+          onClick={() => onEdit(id)}
         >
           <FaEdit />
         </Button>
       </header>
-      <main>Conteudo</main>
+      <main>
+        <div dangerouslySetInnerHTML={{__html: renderedHTML}} />
+      </main>
       <footer>
-        <Button> <FaChevronCircleLeft /> </Button>
-        <Button> <FaTrash /> </Button>
-        <Button> <FaChevronCircleRight /> </Button>
+        {list !== "ToDo" && <Button type="button"> <FaChevronCircleLeft /> </Button>}
+        <Button type="button"> <FaTrash /> </Button>
+        {list !== "Done" && <Button type="button"> <FaChevronCircleRight /> </Button>}
       </footer>
     </div>
   )

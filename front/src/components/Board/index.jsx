@@ -1,10 +1,21 @@
+import { useState } from 'react';
+import { CardModal } from 'components';
+
 import Collumn from "./Collumn";
-import { FaPlusCircle } from "react-icons/fa";
 import './styles.scss';
 
-function Board({ handleNewCard }) {
+function Board() {
 
-  
+  const[showModal, setShowModal] = useState(false);
+
+  const handleNewCard = () => {
+    console.log("New Card");
+    setShowModal(!showModal);
+  }
+
+  const handleCardEdit = (id) => {
+    console.log("EDIÇÃO CARD >>>", id)
+  }
 
   return(
     <main className="board">
@@ -12,9 +23,22 @@ function Board({ handleNewCard }) {
         title="To Do" 
         actionButtonTitle={"Novo card"}
         actionButton={handleNewCard}
+        onCardEdit={handleCardEdit}
       />
-      <Collumn title="Doing" />
-      <Collumn title="Done" />
+      <Collumn 
+        title="Doing" 
+        onCardEdit={handleCardEdit}
+      />
+      <Collumn 
+        title="Done" 
+        onCardEdit={handleCardEdit}
+      />
+
+      <CardModal 
+        visible={showModal} 
+        title="Novo card" 
+        onClose={() => setShowModal(!showModal)} 
+      />
     </main>
   )
 }
