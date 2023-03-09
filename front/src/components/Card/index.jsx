@@ -49,7 +49,7 @@ function Card({data, onEdit, onDelete, onUpdate }) {
       <header>
         <label>{titulo}</label>
         <Button
-          title="Clique aqui para editar o card"
+          title="Editar card"
           onClick={() => onEdit(data)}
         >
           <FaEdit />
@@ -61,16 +61,24 @@ function Card({data, onEdit, onDelete, onUpdate }) {
       <footer>
         <Button 
           type="button" 
-          onClick={() => handleChangeList('left')} 
+          onClick={() => handleChangeList('left')}
           disabled={lista === COLLUMNS_NAME[0]}
+          title="Mover card para a esquerda"
         > 
           <FaChevronCircleLeft /> 
         </Button>
-        <Button type="button" onClick={handleDelete}> <FaTrash /> </Button>
+        <Button 
+          type="button" 
+          onClick={handleDelete}
+          title="Excluir card"
+        >
+          <FaTrash />
+        </Button>
         <Button 
           type="button" 
           onClick={() => handleChangeList('right')}
           disabled={lista === COLLUMNS_NAME[2]}
+          title="Mover card para a direita"
         > 
           <FaChevronCircleRight /> 
         </Button>

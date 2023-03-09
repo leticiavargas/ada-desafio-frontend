@@ -8,7 +8,11 @@ function Collumn({ title, actionButtonTitle, actionButton, onEdit, onDelete, onU
       <header>
         <h2>{title}</h2>
         { actionButtonTitle && 
-          <Button className="square" onClick={actionButton}>
+          <Button 
+            className="square" 
+            onClick={actionButton}
+            title="Adicionar novo card"
+          >
             {actionButtonTitle}
           </Button>
         }
