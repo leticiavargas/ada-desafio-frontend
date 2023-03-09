@@ -1,13 +1,17 @@
+@use 'src/styles/colors';
+
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 12px;
+  //overflow: hidden;
+  background-color: colors.$darkBlue;
 }
 
 html, body, #root {
-  height: 100%;
+  height: 100vh;
 }
 
 code {

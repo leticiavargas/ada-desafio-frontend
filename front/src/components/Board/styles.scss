@@ -4,8 +4,9 @@
 .board {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  align-items: flex-start;
   padding: 0 40px;
+  flex: 1;
 
   .collumn + .collumn {
     margin-left: 24px;

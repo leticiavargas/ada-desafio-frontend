@@ -4,7 +4,7 @@
 .collumn {
   background-color: colors.$lightBlue;
   min-width: 180px;
-  width: 100%;
+  flex: 1;
   border-radius: 6px;
   padding: 0 10px 8px;
   box-sizing: border-box;
@@ -24,7 +24,8 @@
   }
 
   >main {
-    
+    overflow-y: auto;
+
     .empty-state {
       background-color: colors.$gray;
       border-radius: 6px;
